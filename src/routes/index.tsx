@@ -273,6 +273,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [splashDone, setSplashDone] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const handleSplashDone = useCallback(() => setSplashDone(true), []);
   useScrollReveal(splashDone);
 
@@ -293,7 +294,6 @@ function Index() {
         <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50">
           <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
             <a href="#top" className="flex items-center gap-3">
-              {/* Container corta o espaço transparente topo/base sem distorcer */}
               <div style={{ height: "8rem", overflow: "hidden", flexShrink: 0 }}>
                 <img
                   src={logo}
@@ -309,6 +309,8 @@ function Index() {
                 />
               </div>
             </a>
+
+            {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
               <a href="#procedimentos" className="hover:text-foreground transition-colors">Procedimentos</a>
               <a href="#sobre" className="hover:text-foreground transition-colors">Sobre</a>
@@ -322,32 +324,81 @@ function Index() {
             >
               Agende uma consulta
             </a>
+
+            {/* Mobile: hamburguer */}
+            <button
+              className="md:hidden flex flex-col justify-center gap-[5px] p-2 -mr-1"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Abrir menu"
+            >
+              <span className="block w-6 h-0.5 bg-foreground rounded-full" />
+              <span className="block w-6 h-0.5 bg-foreground rounded-full" />
+              <span className="block w-4 h-0.5 bg-foreground rounded-full" />
+            </button>
           </div>
         </header>
+
+        {/* ── MENU MOBILE OVERLAY ── */}
+        {menuOpen && (
+          <div className="md:hidden fixed inset-0 z-[60] bg-background flex flex-col">
+            {/* Topo do menu */}
+            <div className="flex items-center justify-between px-6 py-2 border-b border-border">
+              <div style={{ height: "4rem", overflow: "hidden", flexShrink: 0 }}>
+                <img
+                  src={logo}
+                  alt="Dra. Ágatha Emanuelle"
+                  style={{
+                    height: "7.5rem",
+                    width: "auto",
+                    marginTop: "-1.65rem",
+                    display: "block",
+                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.28)) contrast(1.06) saturate(1.18) brightness(1.03)",
+                  }}
+                />
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Fechar menu"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Links */}
+            <nav className="flex flex-col items-center justify-center flex-1 gap-10">
+              <a href="#procedimentos" onClick={() => setMenuOpen(false)} className="font-serif text-3xl hover:text-accent transition-colors">Procedimentos</a>
+              <a href="#sobre"         onClick={() => setMenuOpen(false)} className="font-serif text-3xl hover:text-accent transition-colors">Sobre</a>
+              <a href="#contato"       onClick={() => setMenuOpen(false)} className="font-serif text-3xl hover:text-accent transition-colors">Contato</a>
+              <div className="h-px w-12 bg-accent/40 my-2" />
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="btn-agendar text-sm px-8 py-3.5 rounded-full"
+              >
+                Agendar uma consulta
+              </a>
+            </nav>
+          </div>
+        )}
 
         {/* ── HERO ── */}
         <section
           id="top"
-          className={`relative min-h-[100svh] overflow-hidden ${splashDone ? "hero-active" : ""}`}
+          className={`${splashDone ? "hero-active" : ""}`}
         >
-          {/* Mobile: full-bleed background */}
-          <img
-            src={heroImg}
-            alt="Dra. Ágatha Emanuelle"
-            className="md:hidden absolute inset-0 w-full h-full object-cover object-top z-0"
-          />
-          <div className="md:hidden absolute inset-0 bg-background/20 z-0" />
-          <div className="absolute inset-0 hero-gold-lines pointer-events-none z-0" />
-
-          <div className="relative z-10 flex flex-col md:grid md:grid-cols-2 min-h-[100svh]">
-            {/* Text column */}
-            <div className="flex flex-col justify-start md:justify-center px-6 md:px-12 lg:px-20 pt-44 pb-16 md:py-0 text-center md:text-left md:bg-background">
-              {/* Decorative vertical gold line – desktop */}
+          <div className="flex flex-col md:grid md:grid-cols-2 min-h-[100svh]">
+            {/* Coluna de texto — fundo branco em mobile e desktop */}
+            <div className="relative bg-background flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-40 pb-12 md:py-0">
+              {/* Linha decorativa dourada vertical — desktop */}
               <div
                 className="hidden md:block absolute left-0 top-[20%] bottom-[20%] w-px opacity-30"
                 style={{
-                  background:
-                    "linear-gradient(to bottom, transparent, oklch(0.75 0.11 82) 50%, transparent)",
+                  background: "linear-gradient(to bottom, transparent, oklch(0.75 0.11 82) 50%, transparent)",
                 }}
               />
 
@@ -355,8 +406,8 @@ function Index() {
                 Biomédica Esteta · Especialista em Tricologia
               </p>
 
-              <h1 className="font-serif leading-[1.08] mb-5 drop-shadow-lg md:drop-shadow-none">
-                <span className="hero-line-1 block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white md:text-foreground">
+              <h1 className="font-serif leading-[1.08] mb-5">
+                <span className="hero-line-1 block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
                   Sua essência
                 </span>
                 <span className="hero-line-2 block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -364,12 +415,12 @@ function Index() {
                 </span>
               </h1>
 
-              <p className="hero-para text-base md:text-lg text-white/95 md:text-muted-foreground max-w-xl mb-8 leading-relaxed font-medium drop-shadow-md md:drop-shadow-none mx-auto md:mx-0">
+              <p className="hero-para text-base md:text-lg text-muted-foreground max-w-xl mb-8 leading-relaxed">
                 Transformamos cuidado em autoestima, com tratamentos personalizados e
                 atendimento pensados para você.
               </p>
 
-              <div className="hero-cta flex justify-center md:justify-start">
+              <div className="hero-cta flex justify-start">
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
@@ -380,22 +431,14 @@ function Index() {
                 </a>
               </div>
 
-              {/* Scroll indicator */}
+              {/* Scroll indicator — desktop */}
               <div className="hero-scroll hidden md:flex flex-col items-start gap-1.5 mt-14">
-                <span className="text-[9px] uppercase tracking-[0.25em] text-muted-foreground/60">
-                  Scroll
-                </span>
-                <div
-                  className="relative overflow-hidden"
-                  style={{ width: 1, height: 36, background: "var(--border)" }}
-                >
+                <span className="text-[9px] uppercase tracking-[0.25em] text-muted-foreground/60">Scroll</span>
+                <div className="relative overflow-hidden" style={{ width: 1, height: 36, background: "var(--border)" }}>
                   <div
                     style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: 12,
+                      position: "absolute", top: 0, left: 0,
+                      width: "100%", height: 12,
                       background: "oklch(0.75 0.11 82)",
                       animation: "scroll-dot 1.9s ease infinite",
                     }}
@@ -404,8 +447,8 @@ function Index() {
               </div>
             </div>
 
-            {/* Image column – desktop only */}
-            <div className="hidden md:block relative overflow-hidden">
+            {/* Coluna da foto — aparece abaixo do texto no mobile, à direita no desktop */}
+            <div className="relative h-[70vw] md:h-auto overflow-hidden">
               <img
                 src={heroImg}
                 alt="Dra. Ágatha Emanuelle"
