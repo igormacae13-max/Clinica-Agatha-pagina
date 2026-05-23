@@ -4,7 +4,9 @@ import heroImg from "@/assets/agatha-hero.jpg";
 import proc1 from "@/assets/agatha-procedure-1.jpg";
 import proc2 from "@/assets/agatha-procedure-2.jpg";
 import tricoImg from "@/assets/agatha-tricologia.jpg";
-import scienceImg from "@/assets/agatha-science.jpg";
+import atendimentoImg from "@/assets/agatha-atendimento-01.jpg";
+import botoxImg from "@/assets/agatha-botox-01.jpg";
+import intraImg from "@/assets/agatha-intradermoterapia-01.jpg";
 import clinicImg from "@/assets/agatha-clinic.jpg";
 import logo from "@/assets/agatha-logo.png";
 
@@ -524,7 +526,7 @@ function Index() {
               <div className="md:col-span-2">
                 <div className="reveal aspect-[4/5] rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] border border-border">
                   <img
-                    src={scienceImg}
+                    src={atendimentoImg}
                     alt="Dra. Ágatha Emanuelle em atendimento"
                     className="w-full h-full object-cover"
                   />
@@ -630,7 +632,7 @@ function Index() {
             </h2>
 
             <div className="grid md:grid-cols-12 gap-4">
-              <div className="reveal md:col-span-7 aspect-[16/10] gallery-item">
+              <div className="reveal md:col-span-8 aspect-[16/9] gallery-item">
                 <img src={clinicImg} alt="Ambiente da clínica" />
                 <div className="gallery-caption">
                   <span className="text-white/90 text-sm font-medium tracking-wide">
@@ -638,14 +640,13 @@ function Index() {
                   </span>
                 </div>
               </div>
-              <div className="reveal delay-1 md:col-span-5 aspect-[16/10] gallery-item">
-                <img src={proc1} alt="Procedimento injetável" />
+              <div className="reveal delay-1 md:col-span-4 aspect-square gallery-item">
+                <img src={atendimentoImg} alt="Atendimento" />
                 <div className="gallery-caption">
-                  <span className="text-white/90 text-sm font-medium tracking-wide">
-                    Injetáveis & Toxina
-                  </span>
+                  <span className="text-white/90 text-sm font-medium tracking-wide">Atendimento</span>
                 </div>
               </div>
+
               <div className="reveal md:col-span-4 aspect-square gallery-item">
                 <img src={tricoImg} alt="Tricologia" />
                 <div className="gallery-caption">
@@ -653,17 +654,28 @@ function Index() {
                 </div>
               </div>
               <div className="reveal delay-1 md:col-span-4 aspect-square gallery-item">
-                <img src={proc2} alt="Cuidado com a pele" />
+                <img src={botoxImg} alt="Toxina Botulínica" />
                 <div className="gallery-caption">
-                  <span className="text-white/90 text-sm font-medium tracking-wide">
-                    Skin & Limpeza
-                  </span>
+                  <span className="text-white/90 text-sm font-medium tracking-wide">Toxina Botulínica</span>
                 </div>
               </div>
               <div className="reveal delay-2 md:col-span-4 aspect-square gallery-item">
-                <img src={scienceImg} alt="Atendimento" />
+                <img src={intraImg} alt="Intradermoterapia" />
                 <div className="gallery-caption">
-                  <span className="text-white/90 text-sm font-medium tracking-wide">Atendimento</span>
+                  <span className="text-white/90 text-sm font-medium tracking-wide">Intradermoterapia</span>
+                </div>
+              </div>
+
+              <div className="reveal md:col-span-6 aspect-[16/10] gallery-item">
+                <img src={proc1} alt="Procedimento injetável" />
+                <div className="gallery-caption">
+                  <span className="text-white/90 text-sm font-medium tracking-wide">Injetáveis</span>
+                </div>
+              </div>
+              <div className="reveal delay-1 md:col-span-6 aspect-[16/10] gallery-item">
+                <img src={proc2} alt="Cuidado com a pele" />
+                <div className="gallery-caption">
+                  <span className="text-white/90 text-sm font-medium tracking-wide">Skin & Limpeza</span>
                 </div>
               </div>
             </div>
