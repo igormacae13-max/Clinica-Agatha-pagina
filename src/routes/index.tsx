@@ -7,8 +7,6 @@ import tricoImg from "@/assets/agatha-tricologia.jpg";
 import scienceImg from "@/assets/agatha-science.jpg";
 import clinicImg from "@/assets/agatha-clinic.jpg";
 import logo from "@/assets/agatha-logo.png";
-import cert1 from "@/assets/agatha-cert-1.jpg";
-import cert2 from "@/assets/agatha-cert-2.jpg";
 
 const WHATSAPP_URL = "https://wa.me/5531992003849";
 
@@ -290,6 +288,8 @@ function Index() {
           transition: "opacity 0.6s ease",
         }}
       >
+        {/* Espaço reservado para a barra fixa — empurra todo conteúdo abaixo dela */}
+        <div style={{ height: "8.5rem" }} aria-hidden />
         {/* ── NAV ── */}
         <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50">
           <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
@@ -393,7 +393,7 @@ function Index() {
         >
           <div className="flex flex-col md:grid md:grid-cols-2 min-h-[100svh]">
             {/* Coluna de texto — fundo branco em mobile e desktop */}
-            <div className="relative bg-background flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-40 pb-12 md:py-0">
+            <div className="relative bg-background flex flex-col justify-center px-6 md:px-12 lg:px-20 py-12 md:py-0">
               {/* Linha decorativa dourada vertical — desktop */}
               <div
                 className="hidden md:block absolute left-0 top-[20%] bottom-[20%] w-px opacity-30"
@@ -403,7 +403,7 @@ function Index() {
               />
 
               <p className="hero-eyebrow text-[10px] uppercase tracking-[0.3em] text-accent mb-5">
-                Biomédica Esteta · Especialista em Tricologia
+                Biomédica Esteta · Tricologista
               </p>
 
               <h1 className="font-serif leading-[1.08] mb-5">
@@ -546,10 +546,7 @@ function Index() {
                 {/* Highlighted first paragraph */}
                 <blockquote className="reveal border-l-2 border-accent pl-5 mb-5">
                   <p className="text-foreground leading-relaxed">
-                    Sou a <strong className="font-medium">Dra. Ágatha Emanuelle</strong>,
-                    biomédica esteta (CRBM). Acredito em uma estética que respeita seu tempo, seus
-                    traços e sua história — entregando resultados naturais com a segurança que você
-                    merece.
+                    Biomédica apaixonada pela estética, dedicada a proporcionar cuidados que vão além dos procedimentos. Acredito que cada pessoa possui uma beleza única, e meu propósito é unir conhecimento, técnica e atendimento personalizado para valorizar sua essência e fortalecer sua autoestima.
                   </p>
                 </blockquote>
 
@@ -571,15 +568,6 @@ function Index() {
                     prática é focada em resultados seguros e naturais — atendendo em Belo
                     Horizonte/MG.
                   </p>
-                </div>
-
-                <div className="reveal grid grid-cols-2 gap-4 mb-8">
-                  <div className="rounded-xl overflow-hidden border border-border shadow-sm">
-                    <img src={cert1} alt="Certificado de especialização" className="w-full h-auto" />
-                  </div>
-                  <div className="rounded-xl overflow-hidden border border-border shadow-sm">
-                    <img src={cert2} alt="Certificado de especialização" className="w-full h-auto" />
-                  </div>
                 </div>
 
                 <a
